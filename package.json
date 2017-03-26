@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://worace.works/food-oasis-frontend",
   "dependencies": {
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",
