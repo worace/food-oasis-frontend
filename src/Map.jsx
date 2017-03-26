@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import Imm from 'immutable';
 
 const MapboxToken = 'pk.eyJ1Ijoid29yYWNlIiwiYSI6ImNqMHEzcmpqNzAxbGwzM281bHQ3dDBsOXIifQ.75hrCmvGH7KVs2Hyl86pzw';
@@ -14,17 +14,17 @@ class Map extends Component {
     return (
       <div style={{position: 'relative'}}>
         <ReactMapboxGl
+          // eslint-disable-next-line
           style="mapbox://styles/mapbox/streets-v8"
           accessToken={MapboxToken}
           center={this.props.center}
-          containerStyle={{height: "100vh",width: "100vw",position:'relative'}}
+          containerStyle={{height: '100vh', width: '100vw', position: 'relative'}}
           onClick={this.props.mapClick}
-          onDrag={this.props.mapDrag}
-          >
+          onDrag={this.props.mapDrag}>
           <Layer
             type="symbol"
             id="marker"
-            layout={{ "icon-image": "marker-15" }}>
+            layout={{ 'icon-image': 'marker-15' }}>
             {this.features()}
           </Layer>
         </ReactMapboxGl>
@@ -36,35 +36,28 @@ class Map extends Component {
     return this.props.points
       .toJS()
       .map(pointTuple)
-      .map(pt => {
-        return <Feature key={`${pt[0]}-${pt[1]}`} coordinates={pt} />;
-      });
+      .map(pt => <Feature key={`${pt[0]}-${pt[1]}`} coordinates={pt} />);
   }
 }
 
-const stateToProps = (state) => {
-  return {
+const stateToProps = (state) => ({
     center: [state.getIn(['center', 'longitude']),
              state.getIn(['center', 'latitude'])],
-    points: state.get('points')
-  };
-};
+    points: state.get('points')});
 
 function lngLatToCoords({lng, lat}) {
-  return Imm.Map({latitude: lat, longitude:lng});
+  return Imm.Map({latitude: lat, longitude: lng});
 }
 
-const dispatchToProps = (dispatch) => {
-  return {
+const dispatchToProps = (dispatch) => ({
     mapClick: (map, event) => {
       dispatch({type: 'POINT_ADDED',
                 coordinates: lngLatToCoords(event.lngLat)});
     },
-    mapDrag: (map, event) => {
+    mapDrag: (map) => {
       dispatch({type: 'MAP_MOVED',
-                coordinates: lngLatToCoords(map.getCenter())});
+        coordinates: lngLatToCoords(map.getCenter())});
     }
-  };
-};
+  });
 
 export default connect(stateToProps, dispatchToProps)(Map);

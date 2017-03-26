@@ -1,5 +1,10 @@
 {
   "extends": "airbnb",
+  "globals": {
+    // false indicates the value cannot be overwritten
+    "document": false,
+    "it": false
+  },
   "rules": {
     "react/sort-comp": 0,
     "object-curly-spacing": 0,
