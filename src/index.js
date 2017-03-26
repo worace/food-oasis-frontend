@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Imm from 'immutable';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import {createLogger} from 'redux-logger';
 import App from './App';
 import './index.css';
 import sourceData from './source_data';
@@ -27,9 +28,15 @@ const initialState = Imm.Map({
   counter: 0,
   sources: Imm.Map(sourceData),
   center: Imm.Map({latitude: 34.0522, longitude: -118.2437}),
+  activePoint: null
 });
 
-const Store = createStore(reducer, initialState);
+const logger = createLogger({
+  stateTransformer: (state) => state.toJS()
+});
+const Store = createStore(reducer,
+                          initialState,
+                          applyMiddleware(logger));
 
 window.store = Store;
 
