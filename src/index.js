@@ -7,15 +7,10 @@ import App from './App';
 import './index.css';
 import sourceData from './source_data';
 
-console.log(sourceData);
-
 function inc(value) { return value + 1; }
 
 const ActionHandlers = {
   COUNTER_INCREMENTED: (state) => state.update('counter', inc),
-  POINT_ADDED: (state, action) => (
-    state.update('points', old => old.push(action.coordinates))
-  ),
   MAP_MOVED: (state, action) => state.set('center', action.coordinates)
 };
 
@@ -30,12 +25,13 @@ const reducer = (state, action) => {
 
 const initialState = Imm.Map({
   counter: 0,
+  sources: Imm.Map(sourceData),
   center: Imm.Map({latitude: 34.0522, longitude: -118.2437}),
-  points: Imm.List([Imm.Map({latitude: 34.023499,
-                             longitude: -118.382667})])
 });
 
 const Store = createStore(reducer, initialState);
+
+window.store = Store;
 
 ReactDOM.render(
   // eslint-disable-next-line react/jsx-filename-extension
