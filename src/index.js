@@ -5,6 +5,9 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
 import './index.css';
+import sourceData from './source_data';
+
+console.log(sourceData);
 
 function inc(value) { return value + 1; }
 
