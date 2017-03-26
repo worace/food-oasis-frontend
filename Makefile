@@ -1,5 +1,6 @@
 deploy:
 	git checkout gh-pages
+	git reset --hard master
 	npm run build
 	mv build/* .
 	git add .
