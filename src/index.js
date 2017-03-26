@@ -12,7 +12,9 @@ function inc(value) { return value + 1; }
 
 const ActionHandlers = {
   COUNTER_INCREMENTED: (state) => state.update('counter', inc),
-  MAP_MOVED: (state, action) => state.set('center', action.coordinates)
+  MAP_MOVED: (state, action) => state.set('center', action.coordinates),
+  POINT_SELECTED: (state, action) => state.set('activePoint', action.payload),
+  POINT_CLEARED: (state, action) => state.set('activePoint', null)
 };
 
 const reducer = (state, action) => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import ReactMapboxGl, { Popup, Layer, Feature } from 'react-mapbox-gl';
 import Imm from 'immutable';
 import _ from 'lodash';
 
@@ -20,15 +20,31 @@ class Map extends Component {
           accessToken={MapboxToken}
           center={this.props.center}
           containerStyle={{height: '100vh', width: '100vw', position: 'relative'}}
-          onDrag={this.props.mapDrag}>
+          onDrag={this.props.mapDrag}
+          onClick={this.props.mapClick}
+          >
           {this.mapLayers()}
+          {this.activePoint()}
         </ReactMapboxGl>
       </div>
     );
   }
 
-  mapLayers() {
-    const icons = {
+  activePoint() {
+    if (this.props.activePoint) {
+      return (
+        <Popup
+          coordinates={pointTuple(this.props.activePoint)}
+          style={{padding: '5px'}}
+          anchor={'top'}>
+          <p style={{margin: '0'}}>{this.props.activePoint.name}</p>
+        </Popup>
+      );
+    }
+    return null;
+  }
+
+  mapLayers() {const icons = {
       'food-pantry': 'bakery-15',
       'community-garden': 'garden-15',
       'supermarket': 'fast-food-15',
@@ -67,6 +83,7 @@ class Map extends Component {
 const stateToProps = (state) => ({
   center: [state.getIn(['center', 'longitude']),
            state.getIn(['center', 'latitude'])],
+  activePoint: state.get('activePoint'),
   sources: state.get('sources')});
 
 function lngLatToCoords({lng, lat}) {
@@ -78,7 +95,9 @@ const dispatchToProps = (dispatch) => ({
     dispatch({type: 'MAP_MOVED',
               coordinates: lngLatToCoords(map.getCenter())});
   },
-  pointClicked: (point, target) => {
+  mapClick: _.partial(dispatch, {type: 'POINT_CLEARED'}),
+  pointClicked: (point) => {
+    dispatch({type: 'POINT_SELECTED', payload: point});
   }
 });
 
