@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './App.css';
+import Map from './Map';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h3>{this.props.counter}</h3>
-        <a href="#" onClick={this.props.onClick}>
-          Increment
-        </a>
+        <div>
+          <h3>{this.props.counter}</h3>
+          <a href="#" onClick={this.props.onClick}>
+            Increment
+          </a>
+        </div>
+        <Map />
       </div>
     );
   }

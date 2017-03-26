@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import { createStore } from 'redux';
 import { Map } from 'immutable';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 
 function inc(value) { return value + 1; }
 
@@ -23,7 +23,10 @@ const reducer = (state, action) => {
   }
 };
 
-const initialState = Map({counter: 0});
+const initialState = Map({
+  counter: 0,
+  center: Map({latitude: 34.0522, longitude: -118.2437})
+});
 
 const Store = createStore(reducer, initialState);
 
