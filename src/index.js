@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import { createStore } from 'redux';
-import { Map } from 'immutable';
+import Imm from 'immutable';
 import { Provider } from 'react-redux';
 
 function inc(value) { return value + 1; }
 
 const ActionHandlers = {
-  "COUNTER_INCREMENTED": (state, action) => state.update('counter', inc)
+  "COUNTER_INCREMENTED": (state, action) => state.update('counter', inc),
+  "POINT_ADDED": (state, action) => {
+    return state.update('points', old => old.push(action.coordinates));
+  },
+  "MAP_MOVED": (state, action) => state.set('center', action.coordinates)
 };
 
 const reducer = (state, action) => {
-  console.log('Handling Action: ', action);
   const handler = ActionHandlers[action.type];
   if (handler) {
     const next = handler(state, action);
@@ -23,9 +26,11 @@ const reducer = (state, action) => {
   }
 };
 
-const initialState = Map({
+const initialState = Imm.Map({
   counter: 0,
-  center: Map({latitude: 34.0522, longitude: -118.2437})
+  center: Imm.Map({latitude: 34.0522, longitude: -118.2437}),
+  points: Imm.List([Imm.Map({latitude: 34.023499,
+                             longitude: -118.382667})])
 });
 
 const Store = createStore(reducer, initialState);
