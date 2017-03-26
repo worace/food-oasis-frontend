@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "react/sort-comp": 0,
+    "object-curly-spacing": 0,
+    "react/prop-types": 0,
+    "react/jsx-closing-bracket-location": 0,
+    "comma-dangle": 0,
+    "arrow-parens": 0,
+    "indent": 0
+  }
+}
