@@ -17,7 +17,7 @@ class Map extends Component {
       <div style={{position: 'relative'}}>
         <ReactMapboxGl
           // eslint-disable-next-line
-          style="mapbox://styles/mapbox/streets-v8"
+          style='mapbox://styles/mapbox/streets-v8'
           accessToken={MapboxToken}
           center={this.props.center}
           containerStyle={{height: '100vh', width: '100vw', position: 'relative'}}
