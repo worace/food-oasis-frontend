@@ -6,29 +6,19 @@ import { applyMiddleware, createStore } from 'redux';
 import {createLogger} from 'redux-logger';
 import App from './App';
 import './index.css';
-import sourceData from './source_data';
-
-function inc(value) { return value + 1; }
-
-const ActionHandlers = {
-  COUNTER_INCREMENTED: (state) => state.update('counter', inc),
-  MAP_MOVED: (state, action) => state.set('center', action.coordinates),
-  POINT_SELECTED: (state, action) => state.set('activePoint', action.payload),
-  POINT_CLEARED: (state, action) => state.set('activePoint', null)
-};
-
-const reducer = (state, action) => {
-  const handler = ActionHandlers[action.type];
-  if (handler) {
-    const next = handler(state, action);
-    return next;
-  }
-  return state;
-};
+import Api from './api';
+import reducers from './reducers';
 
 const initialState = Imm.Map({
   counter: 0,
-  sources: Imm.Map(sourceData),
+  visibleLocationTypes: Imm.Map({supermarket: true,
+                                 farmers_market: true,
+                                 community_garden: true,
+                                 food_pantry: true}),
+  sources: Imm.Map({supermarket: Imm.List(),
+                    farmers_market: Imm.List(),
+                    community_garden: Imm.List(),
+                    food_pantry: Imm.List()}),
   center: Imm.Map({latitude: 34.0522, longitude: -118.2437}),
   activePoint: null
 });
@@ -36,16 +26,22 @@ const initialState = Imm.Map({
 const logger = createLogger({
   stateTransformer: (state) => state.toJS()
 });
-const Store = createStore(reducer,
+
+const Store = createStore(reducers,
                           initialState,
                           applyMiddleware(logger));
 
-window.store = Store;
+function init() {
+  Api.getLocations(Store.dispatch, Store.getState().get('center'));
 
-ReactDOM.render(
-  // eslint-disable-next-line react/jsx-filename-extension
-  <Provider store={Store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+  ReactDOM.render(
+    // eslint-disable-next-line react/jsx-filename-extension
+    <Provider store={Store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+}
+
+
+init();
