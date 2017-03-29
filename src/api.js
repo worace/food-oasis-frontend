@@ -1,9 +1,8 @@
 import axios from 'axios';
 import Imm from 'immutable';
 
-
 const API_HOSTS = {
-  development: 'http://localhost:9393',
+  development: 'http://localhost:9292',
   production: 'https://glacial-tundra-57558.herokuapp.com'
 };
 

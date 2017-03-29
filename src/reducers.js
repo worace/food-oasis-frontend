@@ -5,7 +5,8 @@ const ActionHandlers = {
   MAP_MOVED: (state, action) => state.set('center', action.coordinates),
   POINT_SELECTED: (state, action) => state.set('activePoint', action.payload),
   POINT_CLEARED: (state) => state.set('activePoint', null),
-  SOURCES_RECEIVED: (state, action) => state.set('sources', action.payload)
+  SOURCES_RECEIVED: (state, action) => state.set('sources', action.payload),
+  PAGE_CHANGED: (state, action) => state.set('currentPage', action.payload)
 };
 
 const reducers = (state, action) => {

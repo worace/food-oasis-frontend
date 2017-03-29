@@ -1,14 +1,30 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import './css/App.css';
 import Map from './Map';
 import Header from './Header';
+import List from './LocationList';
 
-const App = () => (
-  <div className="App">
-    <Header />
-    <Map />
-  </div>
-);
+function bodyComponent(currentPage) {
+  if (currentPage === 'map') {
+    return <Map />;
+  }
+  return <List />;
+}
 
+const App = (props) => {
+  return (
+    <div className="App">
+      <Header />
+      {bodyComponent(props.currentPage)}
+      <Map />
+      <List />
+    </div>
+  );
+};
 
-export default App;
+const stateToProps = (state) => ({
+  currentPage: state.get('currentPage')
+});
+
+export default connect(stateToProps)(App);

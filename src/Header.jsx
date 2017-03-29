@@ -1,8 +1,9 @@
 import React from 'react';
 import logo from './images/fola.svg';
-import search from './images/icons/search-black.svg';
+import {connect} from 'react-redux';
+// import search from './images/icons/search-black.svg';
 
-const Header = () => (
+const Header = (props) => (
   <header className="header">
     <div className="primary-nav">
       <h2>
@@ -11,11 +12,30 @@ const Header = () => (
         </a>
       </h2>
       <p className="tagline">Healthy Food for All Angelenos</p>
+      <ul>
+        <li key="map">
+          <a onClick={props.pageChanged('map')} href="/map">Map</a>
+        </li>
+        <li key="list">
+          <a onClick={props.pageChanged('list')} href="/list">List</a>
+        </li>
+      </ul>
     </div>
   </header>
 );
 
-export default Header;
+const stateToProps = (state) => ({
+  currentPage: state.get('currentPage')
+});
+
+const dispatchToProps = (dispatch) => ({
+  pageChanged: (newPage) => (event) => {
+    event.preventDefault();
+    dispatch({type: 'PAGE_CHANGED', payload: newPage});
+  }
+});
+
+export default connect(stateToProps, dispatchToProps)(Header);
 
 // <nav className="secondary-nav location-list-nav">
 //   <ul className="options" id="search-views">

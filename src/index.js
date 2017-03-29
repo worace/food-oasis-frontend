@@ -9,6 +9,7 @@ import Api from './api';
 import reducers from './reducers';
 
 const initialState = Imm.Map({
+  currentPage: 'list',
   counter: 0,
   visibleLocationTypes: Imm.Map({supermarket: true,
                                  farmers_market: true,
@@ -26,6 +27,9 @@ const logger = createLogger({
   stateTransformer: (state) => state.toJS()
 });
 
+// Creating a redux store
+// - reducer function
+// - initialState
 const Store = createStore(reducers,
                           initialState,
                           applyMiddleware(logger));
