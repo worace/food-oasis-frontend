@@ -9,7 +9,7 @@ import Api from './api';
 import reducers from './reducers';
 
 const initialState = Imm.Map({
-  currentPage: 'list',
+  currentPage: 'map',
   counter: 0,
   visibleLocationTypes: Imm.Map({supermarket: true,
                                  farmers_market: true,
