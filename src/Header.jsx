@@ -1,10 +1,7 @@
 import React from 'react';
-import Imm from 'immutable';
 import logo from './images/fola.svg';
 import {connect} from 'react-redux';
 import LocationSearch from './LocationSearch';
-import Geo from './geocode';
-import Api from './api';
 // import search from './images/icons/search-black.svg';
 
 const Header = (props) => (
@@ -24,7 +21,7 @@ const Header = (props) => (
           <a onClick={props.pageChanged('list')} href="/list">List</a>
         </li>
       </ul>
-      <LocationSearch locationSearch={props.locationSearch} />
+      <LocationSearch />
     </div>
   </header>
 );
@@ -37,16 +34,6 @@ const dispatchToProps = (dispatch) => ({
   pageChanged: (newPage) => (event) => {
     event.preventDefault();
     dispatch({type: 'PAGE_CHANGED', payload: newPage});
-  },
-  locationSearch: (query) => {
-    Geo.lookup(query)
-      .then(GeoPlace => GeoPlace.location)
-      .then(({lat, lng}) => {
-        const coordinates = Imm.Map({latitude: lat,
-                               longitude: lng});
-        dispatch({type: 'MAP_MOVED', coordinates});
-        Api.getLocations(dispatch, coordinates);
-      });
   }
 });
 

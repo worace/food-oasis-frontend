@@ -43,12 +43,18 @@ class Map extends Component {
     if (this.props.activePoint) {
       return <ActivePointDetails point={this.props.activePoint} />;
     }
+    return undefined;
   }
 
   markers() {
     return this
       .props
       .sources
+      .filter(point => (
+        this.props
+          .selectedLocationTypes
+          .get(point.location_type)
+      ))
       .map(this.marker.bind(this))
       .toJS();
   }
@@ -90,7 +96,9 @@ const stateToProps = (state) => ({
   center: [state.getIn(['center', 'longitude']),
            state.getIn(['center', 'latitude'])],
   activePoint: state.get('activePoint'),
-  sources: state.get('sources')});
+  selectedLocationTypes: state.get('selectedLocationTypes'),
+  sources: state.get('sources')
+});
 
 function lngLatToCoords({lng, lat}) {
   return Imm.Map({latitude: lat, longitude: lng});

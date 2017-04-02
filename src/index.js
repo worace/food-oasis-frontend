@@ -11,10 +11,10 @@ import reducers from './reducers';
 const initialState = Imm.Map({
   currentPage: 'map',
   counter: 0,
-  visibleLocationTypes: Imm.Map({supermarket: true,
-                                 farmers_market: true,
-                                 community_garden: true,
-                                 food_pantry: true}),
+  selectedLocationTypes: Imm.Map({supermarket: true,
+                                  farmers_market: true,
+                                  community_garden: true,
+                                  food_pantry: true}),
   sources: Imm.List(),
   center: Imm.Map({latitude: 34.0522, longitude: -118.2437}),
   activePoint: null

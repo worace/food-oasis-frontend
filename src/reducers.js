@@ -1,4 +1,5 @@
 function inc(value) { return value + 1; }
+function not(value) { return !value; }
 
 const ActionHandlers = {
   COUNTER_INCREMENTED: (state) => state.update('counter', inc),
@@ -6,7 +7,8 @@ const ActionHandlers = {
   POINT_SELECTED: (state, action) => state.set('activePoint', action.payload),
   POINT_CLEARED: (state) => state.set('activePoint', null),
   SOURCES_RECEIVED: (state, action) => state.set('sources', action.payload),
-  PAGE_CHANGED: (state, action) => state.set('currentPage', action.payload)
+  PAGE_CHANGED: (state, action) => state.set('currentPage', action.payload),
+  LOCATION_TYPE_TOGGLED: (state, action) => state.updateIn(['selectedLocationTypes', action.payload], not)
 };
 
 const reducers = (state, action) => {
