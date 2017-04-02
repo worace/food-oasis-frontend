@@ -1,10 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import _ from 'lodash';
 
 function elements(sources, itemClick) {
-  return sources.get('supermarket').map(location => (
+  return sources.map(location => (
     <li key={location.id}>
-      <p><a onClick={itemClick}>{location.name}</a></p>
+      <p>
+        <a href={`/locations/${location.id}`} onClick={_.partial(itemClick, location)}>
+          {location.name}
+        </a>
+      </p>
     </li>
   ));
 }
@@ -19,8 +24,9 @@ const stateToProps = (state) => ({
   sources: state.get('sources')});
 
 const dispatchToProps = (dispatch) => ({
-  itemClick: (event) => {
-    console.log(event);
+  itemClick: (location, event) => {
+    event.preventDefault();
+    dispatch({type: 'POINT_SELECTED', payload: location});
   }
 });
 
