@@ -24,7 +24,7 @@ export default {
   getLocations: (dispatch, coords) => {
     const fullUrl = url('/nearby', coords);
     return axios.get(fullUrl)
-      .then(resp => Imm.Map(resp.data).map(jsArr => Imm.List(jsArr)))
+      .then(resp => Imm.List(resp.data))
       .then(sources => dispatch({type: 'SOURCES_RECEIVED', payload: sources}));
   }
 };

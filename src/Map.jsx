@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import ReactMapboxGl, { Popup, Layer, Feature } from 'react-mapbox-gl';
+import ReactMapboxGl, { Popup, Marker } from 'react-mapbox-gl';
 import Imm from 'immutable';
 import _ from 'lodash';
 import Api from './api';
@@ -11,24 +11,38 @@ function pointTuple({latitude, longitude}) {
   return [longitude, latitude];
 }
 
+const locationClassNames = {
+  food_pantry: 'food-pantry-marker',
+  farmers_market: 'farmers-market-marker',
+  community_garden: 'community-garden-marker',
+  supermarket: 'supermarket-marker'
+};
+
 class Map extends Component {
   render() {
     return (
       <div style={{position: 'relative'}}>
         <ReactMapboxGl
           // eslint-disable-next-line
-          style='mapbox://styles/mapbox/streets-v8'
+          style='mapbox://styles/mapbox/basic-v9'
           accessToken={MapboxToken}
           center={this.props.center}
-          containerStyle={{height: '100vh', width: '100vw', position: 'relative'}}
+          containerStyle={{height: '80vh', width: '80vw', position: 'relative'}}
           onDrag={this.props.mapDrag}
           onClick={this.props.mapClick}
           >
-          {this.mapLayers()}
-          {this.activePoint()}
+          {this.markers()}
         </ReactMapboxGl>
       </div>
     );
+  }
+
+  markers() {
+    return this
+      .props
+      .sources
+      .map(this.marker.bind(this))
+      .toJS();
   }
 
   activePoint() {
@@ -45,39 +59,22 @@ class Map extends Component {
     return null;
   }
 
-  mapLayers() {const icons = {
-      'food_pantry': 'bakery-15',
-      'community_garden': 'garden-15',
-      'supermarket': 'fast-food-15',
-      'farmers_market': 'picnic-site-15'
-    };
+  marker(point) {
+    let locationTypeClass = locationClassNames[point.location_type];
+    if (this.props.activePoint && this.props.activePoint.id === point.id) {
+      locationTypeClass += ' active';
+    }
 
-    return this.props.sources.entrySeq().map(([layerName, points]) => {
-      return this.mapLayer(layerName, icons[layerName], points);
-    });
-  }
-
-  mapLayer(id, icon, points) {
     return (
-      <Layer
-        type="symbol"
-        key={id}
-        id={id}
-        layout={{'icon-image': icon }}>
-        {this.featureSet(points)}
-      </Layer>
-    );
-  }
-
-  featureSet(points) {
-    return points.map(point => {
-      return (
-        <Feature
+      <Marker
+        className={`marker ${locationTypeClass}`}
+        coordinates={pointTuple(point)}
         onClick={_.partial(this.props.pointClicked, point)}
-        name={point.name}
-        key={`${point.latitude}-${point.longitude}`}
-        coordinates={pointTuple(point)} />
-      )}).toJS();
+        key={point.id}
+        >
+        <span className="label">{point.name}</span>
+      </Marker>
+    );
   }
 }
 

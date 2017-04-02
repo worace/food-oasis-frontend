@@ -15,10 +15,7 @@ const initialState = Imm.Map({
                                  farmers_market: true,
                                  community_garden: true,
                                  food_pantry: true}),
-  sources: Imm.Map({supermarket: Imm.List(),
-                    farmers_market: Imm.List(),
-                    community_garden: Imm.List(),
-                    food_pantry: Imm.List()}),
+  sources: Imm.List(),
   center: Imm.Map({latitude: 34.0522, longitude: -118.2437}),
   activePoint: null
 });
