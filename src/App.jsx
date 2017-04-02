@@ -17,8 +17,6 @@ const App = (props) => {
     <div className="App">
       <Header />
       {bodyComponent(props.currentPage)}
-      <Map />
-      <List />
     </div>
   );
 };
