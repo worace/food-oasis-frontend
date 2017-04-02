@@ -74,19 +74,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .farmers-market-marker {
-    background-image: url(/images/pin-red-small.svg);
+    background-image: url(/food-oasis-frontend/images/pin-red-small.svg);
 }
 
 .community-garden-marker {
-    background-image: url(/images/pin-green-small.svg);
+    background-image: url(/food-oasis-frontend/images/pin-green-small.svg);
 }
 
 .food-pantry-marker {
-    background-image: url(/images/pin-yellow-small.svg);
+    background-image: url(/food-oasis-frontend/images/pin-yellow-small.svg);
 }
 
 .supermarket-marker {
-    background-image: url(/images/pin-red-small.svg);
+    background-image: url(/food-oasis-frontend/images/pin-red-small.svg);
 }
 
 .marker-base.active {
@@ -98,19 +98,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .farmers-market-marker.active {
-    background-image: url(/images/pin-red-large.svg);
+    background-image: url(/food-oasis-frontend/images/pin-red-large.svg);
 }
 
 .community-garden-marker.active {
-    background-image: url(/images/pin-green-large.svg);
+    background-image: url(/food-oasis-frontend/images/pin-green-large.svg);
 }
 
 .food-pantry-marker.active {
-    background-image: url(/images/pin-yellow-large.svg);
+    background-image: url(/food-oasis-frontend/images/pin-yellow-large.svg);
 }
 
 .supermarket-marker.active {
-    background-image: url(/images/pin-red-large.svg);
+    background-image: url(/food-oasis-frontend/images/pin-red-large.svg);
 }
 
 /* =Header
