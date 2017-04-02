@@ -24,9 +24,6 @@ const logger = createLogger({
   stateTransformer: (state) => state.toJS()
 });
 
-// Creating a redux store
-// - reducer function
-// - initialState
 const Store = createStore(reducers,
                           initialState,
                           applyMiddleware(logger));

@@ -11,6 +11,8 @@ const API_HOSTS = {
 const API_BASE = API_HOSTS[process.env.NODE_ENV];
 
 function queryString(map) {
+  // given Immutable.Map({lat: 12, lng: 34})
+  // produce the querystring '?lat=12&lng=34'
   return '?' + map.entrySeq()
     .map(([k, v]) => `${k}=${v}`)
     .join('&');
