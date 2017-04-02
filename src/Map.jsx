@@ -4,6 +4,7 @@ import ReactMapboxGl, { Popup, Marker } from 'react-mapbox-gl';
 import Imm from 'immutable';
 import _ from 'lodash';
 import Api from './api';
+import ActivePointDetails from './ActivePointDetails';
 
 const MapboxToken = 'pk.eyJ1Ijoid29yYWNlIiwiYSI6ImNqMHEzcmpqNzAxbGwzM281bHQ3dDBsOXIifQ.75hrCmvGH7KVs2Hyl86pzw';
 
@@ -22,12 +23,13 @@ class Map extends Component {
   render() {
     return (
       <div style={{position: 'relative'}}>
+        {this.activePointDetails()}
         <ReactMapboxGl
           // eslint-disable-next-line
           style='mapbox://styles/mapbox/basic-v9'
           accessToken={MapboxToken}
           center={this.props.center}
-          containerStyle={{height: '80vh', width: '80vw', position: 'relative'}}
+          containerStyle={{height: '80vh', width: '100vw', position: 'relative'}}
           onDrag={this.props.mapDrag}
           onClick={this.props.mapClick}
           >
@@ -35,6 +37,12 @@ class Map extends Component {
         </ReactMapboxGl>
       </div>
     );
+  }
+
+  activePointDetails() {
+    if (this.props.activePoint) {
+      return <ActivePointDetails point={this.props.activePoint} />;
+    }
   }
 
   markers() {
