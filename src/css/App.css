@@ -1,17 +1,4 @@
-.App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
+@charset "utf-8";
 
 .mapboxgl-canvas {
     position: relative !important;
@@ -23,33 +10,81 @@ body {
   font-family: sans-serif;
 }
 
-
-@charset "utf-8";
-
-/*
-        Styles for Food Oasis LA
-
-        Sections are grouped under headings with a “=” symbol,
-        to make searching easier.
-
-        When a style is used more than once, it sometimes has a “@keyword”
-        in a comment next to it (to help with search and replace).
-
-        For example…
-
-        16px  @font-size
-        24px  @line-height
-        32em  @page-max-width
-*/
-
-del {
-    display: block;
-    opacity: 0.25;
+.farmers-market-marker {
+    cursor: pointer;
+    height: 46px;
+    width: 30px;
+    background-image: url(/assets/images/map/pin-red-small.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -15px;
+    margin-top: -40px;
 }
-mark {
-    text-decoration: none;
-    display: inline-block;
-    transform: rotate(-15deg);
+
+.community-garden-marker {
+    cursor: pointer;
+    height: 46px;
+    width: 30px;
+    background-image: url(/assets/images/map/pin-green-small.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -15px;
+    margin-top: -40px;
+}
+
+.food-pantry-marker {
+    cursor: pointer;
+    height: 46px;
+    width: 30px;
+    background-image: url(/assets/images/map/pin-yellow-small.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -15px;
+    margin-top: -40px;
+}
+
+.farmers-market-marker.active {
+    cursor: default;
+    height: 70px;
+    width: 42px;
+    background-image: url(/assets/images/map/pin-red-large.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -21px;
+    margin-top: -64px;
+}
+
+.community-garden-marker.active {
+    cursor: default;
+    height: 70px;
+    width: 42px;
+    background-image: url(/assets/images/map/pin-green-large.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -21px;
+    margin-top: -64px;
+}
+
+.food-pantry-marker.active {
+    cursor: default;
+    height: 70px;
+    width: 42px;
+    background-image: url(/assets/images/map/pin-yellow-large.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -21px;
+    margin-top: -64px;
+}
+
+.supermarket-marker.active {
+    cursor: default;
+    height: 70px;
+    width: 42px;
+    background-image: url(/assets/images/map/pin-red-large.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -21px;
+    margin-top: -64px;
 }
 
 /* =Elements
@@ -60,28 +95,6 @@ body {
     margin: 0;
     padding: 0;
     font: 100%/1.5 "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
-}
-
-/* OPTIONAL: Increase the font size on big screens. */
-@media screen and (min-width: 600px) and (min-height: 600px) {
-    html {
-        font-size: 112.5%;
-    }
-}
-@media screen and (min-width: 800px) and (min-height: 800px) {
-    html {
-        font-size: 125%;
-    }
-}
-@media screen and (min-width: 1000px) and (min-height: 1000px) {
-    html {
-        font-size: 137.5%;
-    }
-}
-@media screen and (min-width: 1200px) and (min-height: 1200px) {
-    html {
-        font-size: 150%;
-    }
 }
 
 a {
@@ -106,210 +119,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     margin-top: 1.5em;
 }
-
-/* =Button
-        ----------------------------------------------- */
-.action button,
-.action a {
-    display: inline-block;
-    background: rgb(144, 194, 70); /* @lime */
-    background-image: linear-gradient(to top, rgb(124, 174, 50), rgba(124, 174, 50, 0)); /* @dark-lime */
-    color: white;
-    padding: 0.375em 1.5em;
-    border-radius: 0.25em;
-    font-family: "Reem Kufi", "Helvetica Neue", Helvetica, sans-serif;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-color: transparent;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: inherit;
-    text-transform: uppercase;
-    line-height: inherit;
-}
-.action button:hover,
-.action button:active,
-.action button:focus,
-.action a:hover,
-.action a:active,
-.action a:focus {
-    background: rgb(124, 174, 50); /* @dark-lime */
-    text-decoration: none;
-    color: white;
-}
-
-.action.secondary a,
-.action.secondary button {
-    background: white;
-    color: black;
-    border-color: black;
-}
-
-
-/* =Options
-        ----------------------------------------------- */
-.options {
-    display: flex;
-    list-style: none;
-    padding-left: 0;
-
-    justify-content: space-between;
-    align-items: center;
-}
-.options li + li {
-    margin-left: 1em;
-}
-
-.options.search {
-    background-color: rgb(241, 241, 241);
-    padding: 0.75em 1.5em;
-    margin-top: -1.5em;
-    margin-left: -1.5em;
-    margin-right: -1.5em;
-}
-@media (min-width: 46em) {
-    .options.search {
-        margin-top: -1.5em;
-        margin-left: calc(-50vw + 20em);
-        margin-right: calc(-50vw + 20em);
-    }
-}
-
-
-/* =Map
-        ----------------------------------------------- */
-.map-container {
-    height: 500px;
-    height: 50vh;
-    height: calc(100vh - 14.625em);
-    width: 100%;
-    overflow: hidden;
-}
-
-/* OPTIONAL: Increase the font size on big screens. */
-@media screen and (min-width: 600px) and (min-height: 600px) {
-    .map-container {
-        height: calc(100vh - 16em);
-    }
-}
-@media screen and (min-width: 800px) and (min-height: 800px) {
-    .map-container {
-        height: calc(100vh - 16.75em);
-    }
-}
-@media screen and (min-width: 1000px) and (min-height: 1000px) {
-    .map-container {
-        height: calc(100vh - 17.75em);
-    }
-}
-@media screen and (min-width: 1200px) and (min-height: 1200px) {
-    .map-container {
-        height: calc(100vh - 18.75em);
-    }
-}
-
-.has-map-location-summary .map-container {
-    height: calc(100vh - 30em);
-    min-height: 50vh;
-}
-
-.location-details .map-container {
-    height: 30vh;
-}
-
-.only-map main {
-    display: none;
-}
-
-.only-list #map,
-.only-list .location-summary-container {
-    display: none;
-}
-
-
-/* =You are here
-        ----------------------------------------------- */
-@keyframes sonar {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(3);
-        opacity: 0;
-    }
-}
-
-@keyframes shrink {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.875);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-
-.you-are-here::before {
-    content: "";
-    display: block;
-    border-radius: 50%;
-    background-color: rgb(0, 128, 255);
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-
-    animation: sonar 3s infinite ease-out;
-}
-.you-are-here::after {
-    content: "";
-    display: block;
-    border-radius: 50%;
-    position: absolute;
-    top: -20%;
-    left: -20%;
-    z-index: -1;
-    width: 140%;
-    height: 140%;
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 40%, transparent 60%, transparent 100%);
-    background-size: contain;
-}
-
-.you-are-here {
-    position: relative;
-    font-size: 1rem;
-    margin-top: -1.25em;
-    margin-right: -1.25em;
-    background: white;
-    padding: 0.2em;
-    border-radius: 50%;
-    display: inline-block;
-    width: auto !important;
-    height: auto !important;
-}
-.you-are-here span {
-    display: block;
-    width: 1.05em;
-    height: 1.05em;
-    background-color: rgb(0, 128, 255);
-    border-radius: 50%;
-    animation: shrink 3s 1.5s infinite both;
-
-    /* @hidden-accessible-text */
-    text-indent: -9999px;
-    overflow: hidden;
-}
-
 
 /* =Marker
         ----------------------------------------------- */
@@ -387,39 +196,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* =Leaflet Location Summary
-        -----------------------------------------------
-        SHIM: Override the default leaflet styles to make the location summary appear the same way it does in the “list”
-        ----------------------------------------------- */
-.leaflet-popup-content .location-summary {
-    display: block;
-    max-width: 80vw;
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 0.75em;
-    color: inherit;
-}
-.leaflet-popup-content .location-summary img {
-    box-sizing: content-box;
-}
-.leaflet-popup-content .location-summary p {
-    margin-top: 0.75em;
-    margin-bottom: 0.75em;
-    font-size: inherit;
-    line-height: inherit;
-}
-.leaflet-popup-content .location-summary h2 {
-    margin-top: 0;
-    font-family: "Reem Kufi", "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 1.25em;
-    line-height: 1.2;
-    font-style: inherit;
-}
-.leaflet-popup-content .location-summary p:last-child {
-    margin-bottom: 0;
-}
-
-
 /* =Header
         ----------------------------------------------- */
 body {
@@ -465,86 +241,6 @@ header h2 img {
     margin-top: 0em;
 }
 
-/* SHIM: Hide the tagline on small screens */
-@media (max-width: 21em) {
-    header .tagline {
-        position: absolute;
-        left: -9909px
-    }
-}
-
-.nav-link img {
-    vertical-align: middle;
-    height: 1.25em;
-    width: auto;
-}
-
-
-/* =Nav
-        ----------------------------------------------- */
-nav {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0.125em 0.125em rgba(0, 0, 0, 0.125);
-    position: relative;
-    z-index: 1;
-}
-main + nav {
-    box-shadow: none;
-}
-nav a {
-    text-decoration: none;
-    color: inherit;
-}
-nav .filter,
-nav .view {
-    text-transform: uppercase;
-}
-nav .search {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background: white;
-    padding: 0.5em 0.75em 0.375em 0.375em;
-    border-radius: 0.25em;
-}
-
-nav p,
-nav ul {
-    margin: 0;
-}
-
-/* icon */
-nav img {
-    vertical-align: middle;
-}
-
-nav.pagination {
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    text-align: center;
-}
-nav.pagination .secondary a {
-    text-transform: none;
-    border-width: 0;
-    font-family: inherit;
-}
-
-
-/* =Location List Nav
-        ----------------------------------------------- */
-nav.location-list-nav {
-    display: block; /* SHIM: Reset display flex */
-}
-nav.location-list-nav .options {
-    display: flex;
-    justify-content: space-between;
-}
-nav.location-list-nav .view {
-    flex-basis: 3em;
-    text-align: right;
-}
-
-
 /* =Layout
         ----------------------------------------------- */
 header,
@@ -561,286 +257,4 @@ header {
 nav {
     padding-top: 0.375em;
     padding-bottom: 0.375em;
-}
-
-/*
-        main {
-                max-width: 40em;
-                margin-left: auto;
-                margin-right: auto;
-        }
-*/
-
-main > * {
-    max-width: 40rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/* =Description List
-        ----------------------------------------------- */
-dt {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    padding-top: 0.375em;
-    padding-bottom: 0.375em;
-    padding-left: 1.5em;
-}
-dd {
-    padding-bottom: 0.375em;
-
-    /* For long URLs on the detail page */
-    /* @wrap-long-words */
-    word-wrap     : break-word;
-    overflow-wrap : break-word;
-}
-@media (min-width: 40em) {
-    dl:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-    dt {
-        clear: both;
-        float: left;
-        width: 14em;
-        text-align: left;
-        padding-bottom: 0.375em;
-        box-sizing: border-box;
-        white-space: nowrap;
-    }
-    dt + dd {
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        padding-top: 0.375em;
-    }
-    dd {
-        padding-left: 1.45em;
-        margin-left: 14em;
-    }
-}
-
-
-/* =List
-        ----------------------------------------------- */
-.list {
-    list-style: none;
-    padding-left: 0;
-}
-main > .list:first-child {
-    margin-top: 0;
-}
-.list li + li {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-.list a,
-.list label,
-.location-summary {
-    display: block;
-    color: inherit;
-    padding-top: 0.75em;
-    padding-bottom: 0.75em;
-    text-decoration: none;
-}
-.list input[type="checkbox"] {
-    font-size: inherit;
-}
-.list h2,
-.location-summary h1,
-.location-summary h2 {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 1.25em;
-    line-height: 1.25;
-    padding-left: 3rem;
-}
-.list .address,
-.location-summary .address,
-.leaflet-popup-content .location-summary .address {
-    margin-top: 0;
-}
-.location-summary .type a,
-.location-summary .address a {
-    text-decoration: none;
-    color: inherit;
-}
-.header .location-summary {
-    margin-bottom: 3em;
-}
-.list .open,
-.location-summary .open,
-.leaflet-popup-content .location-summary .open {
-    color: rgb(66, 194, 231);
-    text-transform: uppercase;
-    font-size: 0.75em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-bottom: 0;
-    position: absolute;
-    bottom: 0.75rem;
-    left: 0;
-}
-.leaflet-popup-content .location-summary .open {
-    left: 0.75rem;
-}
-.list .type,
-.location-summary .type,
-.leaflet-popup-content .location-summary .type {
-    font-style: italic;
-    margin-bottom: 2.25em;
-}
-.list .distance,
-.location-summary .distance,
-.leaflet-popup-content .location-summary .distance {
-    font-size: 0.75em;
-    opacity: 0.5;
-    margin-bottom: 0;
-    position: absolute;
-    bottom: 0.75rem;
-    right: 0;
-}
-.leaflet-popup-content .location-summary .distance {
-    right: 0.75rem;
-}
-
-.list .farmers-market .type,
-.farmers-market .location-summary .type {
-    color: rgb(241, 95, 91); /* @strawberry */
-}
-.list .community-garden .type,
-.community-garden .location-summary .type {
-    color: rgb(144, 194, 70); /* @lime */
-}
-.list .food-pantry .type,
-.food-pantry .location-summary .type {
-    color: rgb(249, 192, 88); /* @canteloupe */
-}
-
-
-.list .classification {
-    font-size: 0.875em;
-}
-.list li,
-.location-summary {
-    position: relative;
-}
-.list li img,
-.location-summary img {
-    position: absolute;
-    top: 1.125em;
-    height: 2.25em;
-    width: auto;
-}
-.list li img ~ span,
-.list li img ~ p,
-.location-summary img ~ span,
-.location-summary img ~ p {
-    padding-left: 3rem;
-}
-.list li input[type="checkbox"] {
-    position: absolute;
-    top: 50%;
-    right: 1.5em;
-}
-
-.location-summary img {
-    width: auto;
-    height: 2.25em;
-    vertical-align: middle;
-    margin-right: 0.375em;
-}
-
-/* If advanced selectors are supported, hide the checkboxes… */
-.list input[type="checkbox"]:checked,
-.list input[type="checkbox"]:not(:checked) {
-    opacity: 0;
-}
-/* …and hint that the numbers are push-able. */
-.list input[type="checkbox"]:checked       ~ .pseudo-checkbox,
-.list input[type="checkbox"]:not(:checked) ~ .pseudo-checkbox {
-    padding: 0; /* SHIM: Reset */
-
-    display: block;
-    width: 1.875em;
-    height: 1.875em;
-    border: 0.125em solid black;
-    position: absolute;
-    top: 50%;
-    top: calc(50% - 0.9375em);
-    right: 1.5em;
-    border-radius: 0.375em;
-}
-
-/* If a checkbox is checked, show the related number. */
-.list input[type="checkbox"]:checked ~ .pseudo-checkbox {
-    background-image: url(/assets/images/icons/checkmark.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* If a checkbox is focused, highlight the related number. */
-.list input[type="checkbox"]:focus ~ .pseudo-checkbox {
-    border-color: rgb(40, 137, 187); /* @blueberry */
-}
-.list input[type="checkbox"]:checked:focus ~ .pseudo-checkbox {
-    border-color: rgb(40, 137, 187); /* @blueberry */
-}
-
-
-/* =Field
-        ----------------------------------------------- */
-input[type="text"],
-input[type="search"] {
-    line-height: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    padding: 0.375em 0.75em;
-    border-radius: 0.25em;
-    border: 1px solid black;
-    border-color: rgba(0, 0, 0, 0.25);
-    width: 20em;
-    max-width: 100%;
-    box-sizing: border-box;
-
-    /* Remove default */
-    -webkit-appearance: none;
-}
-@media (max-width: 35em) {
-    input[type="text"],
-    input[type="search"],
-    form button {
-        width: 100%;
-    }
-}
-
-.search-field {
-    margin: -0.75em -1.5em 0;
-    background-color: rgb(241, 241, 241);
-    padding: 0.75em 1.5em;
-}
-@media (min-width: 46em) {
-    .search-field {
-        margin-top: -1.5em;
-        margin-left: calc(-50vw + 20em);
-        margin-right: calc(-50vw + 20em);
-    }
-}
-.search-field label {
-    display: block;
-    max-width: 40em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.search-field input[type="search"] {
-    padding-left: 2.25em;
-    background-image: url(/assets/images/icons/location.svg);
-    background-position: 0.75em 50%;
-    background-size: auto 1.5em;
-    background-repeat: no-repeat;
-}
-
-fieldset {
-    margin-top: 0.75em;
-    margin-bottom: 0.75em;
-    border: 0.25em solid rgb(204, 204, 204);
 }
